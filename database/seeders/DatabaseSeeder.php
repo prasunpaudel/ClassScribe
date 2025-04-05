@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ClassSeeder::class,
             WeekSeeder::class,
+            ResourceSeeder::class,
         ]);
     }
 }

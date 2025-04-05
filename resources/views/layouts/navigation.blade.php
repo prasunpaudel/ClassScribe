@@ -12,9 +12,15 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('teacher.form')" :active="request()->routeIs('teacher.form')">
-                        {{ __('Teacher form') }}
-                    </x-nav-link>
+                    @if (Auth::user()->role == 'teacher')
+                        <x-nav-link :href="route('teacher.form')" :active="request()->routeIs('teacher.form')">
+                            {{ __('Teacher Content') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('student.display')" :active="request()->routeIs('teacher.form')">
+                            {{ __('Student Display') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,10 +25,9 @@ Route::middleware(['auth', 'teacher'])->group(function () {
     Route::post('/teacher/selectWeek', [TeacherController::class, 'selectWeek'])->name('teacher.selectWeek');
     Route::post('/teacher/store/{week_id}', [TeacherController::class, 'store'])->name('teacher.store');
 });
-Route::middleware(['auth', 'student'])->group(function () {
-    Route::get('/student/form', [TeacherController::class, 'index'])->name('student.form');
-    Route::post('/student/selectSubject', [TeacherController::class, 'selectSubject'])->name('student.selectSubject');
-    Route::post('/student/selectWeek', [TeacherController::class, 'selectWeek'])->name('student.selectWeek');
-    Route::post('/student/store/{week_id}', [TeacherController::class, 'store'])->name('student.store');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/student/display', [StudentController::class, 'index'])->name('student.display');
+    Route::post('/student/selectWeek', [StudentController::class, 'selectWeek'])->name('student.selectWeek');
 });
+Route::post('/student/saveNote/{week_id}', [StudentController::class, 'saveNote'])->name('student.saveNote');
 require __DIR__.'/auth.php';

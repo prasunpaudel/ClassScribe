@@ -127,12 +127,22 @@
         @if (Route::has('login'))
             <nav class="-mx-3 flex flex-1 justify-end">
                 @auth
-                    <a
-                        href="{{ url('/dashboard') }}"
-                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                    >
-                        Dashboard
-                    </a>
+                    @if (Auth::user()->role == 'teacher')
+                        <a
+                            href="{{ route('teacher.form') }}"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        >
+                            Teacher Content
+                        </a>
+                    @else
+                        <a
+                            href="{{ route('student.display') }}"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        >
+                            Student Display
+                        </a>
+                        
+                    @endif
                 @else
                     <a
                         href="{{ route('login') }}"
