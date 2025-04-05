@@ -13,7 +13,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        if (session('selected_week')) {
+        if (session('selected_week') !=null) {
             $week_id = session('selected_week');
             $selectedWeek = Week::where('id', $week_id)->first();
             $resources = Resource::where('week_id', $week_id)->get();
@@ -25,16 +25,21 @@ class StudentController extends Controller
                 'next_topic' => $selectedWeek->next_topic,
                 'next_session_prep' => $selectedWeek->next_session_prep,
                 'resources' => $resources,
-                'notes' => StudentNote::where('week_id', $week_id)->first()->note,
                 'weeks' => Week::all(),
             ];
-        } else {
+            if (StudentNote::where('week_id', $week_id)->first() != null) {
+                $note = StudentNote::where('week_id', $week_id)->first()->note;
+                $data['note'] = $note;
+            } else {
+                $data['note'] = null;
+            }
+        }
             // If no week is selected, show the form to select a week
-            
+        else {
             $data = [
                 'weeks' => Week::all(),
             ];
-        }   
+        }
         return view('studentIndex', $data);
     }
     public function selectWeek(Request $request)

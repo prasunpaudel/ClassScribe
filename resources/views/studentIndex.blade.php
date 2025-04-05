@@ -241,7 +241,7 @@
             <div>
                 <div class="section-title">My Notes</div>
                 <div class="mb-3">
-                    <textarea class="form-control" id="notesArea" name="note" placeholder="Type your notes here...">{{ $notes ?? '' }}</textarea>
+                    <textarea class="form-control" id="notesArea" name="note" placeholder="Type your notes here...">{{ $note ?? '' }}</textarea>
                 </div>
                 <div class="button-group">
                     <button type="submit" class="btn btn-primary" id="saveNotesBtn">
